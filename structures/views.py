@@ -221,19 +221,20 @@ def index():
 
 
 # ContentType API Endpoints
+# curl -i http://127.0.0.1:5000/api/content-types
 @app.route('/api/content-types', methods=['GET'])
 def get_content_types():
     all_content_types = ContentType.query.all()
     result = content_types_schema.dump(all_content_types)
     return jsonify(result)
 
-
+# curl -i http://127.0.0.1:5000/api/content-types/<id>
 @app.route('/api/content-types/<int:id>', methods=['GET'])
 def get_content_type(id):
     content_type = ContentType.query.get_or_404(id)
     return content_type_schema.dump(content_type)
 
-
+# curl -i -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/content-types -d '{"name": "New Content Type"}'
 @app.route('/api/content-types', methods=['POST'])
 def add_content_type():
     name = request.json['name']
@@ -242,7 +243,7 @@ def add_content_type():
     db.session.commit()
     return content_type_schema.dump(new_content_type)
 
-
+# curl -i -H "Content-Type: application/json" -X PUT http://127.0.0.1:5000/api/content-types/<id> -d '{"name": "Updated Content Type"}'
 @app.route('/api/content-types/<int:id>', methods=['PUT'])
 def update_content_type(id):
     content_type = ContentType.query.get_or_404(id)
@@ -250,7 +251,7 @@ def update_content_type(id):
     db.session.commit()
     return content_type_schema.dump(content_type)
 
-
+# curl -i -X DELETE http://127.0.0.1:5000/api/content-types/<id>
 @app.route('/api/content-types/<int:id>', methods=['DELETE'])
 def delete_content_type(id):
     content_type = ContentType.query.get_or_404(id)
@@ -260,19 +261,20 @@ def delete_content_type(id):
 
 
 # Country API Endpoints
+# curl -i http://127.0.0.1:5000/api/countries
 @app.route('/api/countries', methods=['GET'])
 def get_countries():
     all_countries = Country.query.all()
     result = countries_schema.dump(all_countries)
     return jsonify(result)
 
-
+# curl -i http://127.0.0.1:5000/api/countries/<id>
 @app.route('/api/countries/<int:id>', methods=['GET'])
 def get_country(id):
     country = Country.query.get_or_404(id)
     return country_schema.dump(country)
 
-
+# curl -i -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/countries -d '{"name": "New Country"}'
 @app.route('/api/countries', methods=['POST'])
 def add_country():
     name = request.json['name']
@@ -281,7 +283,7 @@ def add_country():
     db.session.commit()
     return country_schema.dump(new_country)
 
-
+# curl -i -H "Content-Type: application/json" -X PUT http://127.0.0.1:5000/api/countries/<id> -d '{"name": "Updated Country"}'
 @app.route('/api/countries/<int:id>', methods=['PUT'])
 def update_country(id):
     country = Country.query.get_or_404(id)
@@ -289,7 +291,7 @@ def update_country(id):
     db.session.commit()
     return country_schema.dump(country)
 
-
+# curl -i -X DELETE http://127.0.0.1:5000/api/countries/<id>
 @app.route('/api/countries/<int:id>', methods=['DELETE'])
 def delete_country(id):
     country = Country.query.get_or_404(id)
@@ -299,19 +301,20 @@ def delete_country(id):
 
 
 # Rating API Endpoints
+# curl -i http://127.0.0.1:5000/api/ratings
 @app.route('/api/ratings', methods=['GET'])
 def get_ratings():
     all_ratings = Rating.query.all()
     result = ratings_schema.dump(all_ratings)
     return jsonify(result)
 
-
+# curl -i http://127.0.0.1:5000/api/ratings/<id>
 @app.route('/api/ratings/<int:id>', methods=['GET'])
 def get_rating(id):
     rating = Rating.query.get_or_404(id)
     return rating_schema.dump(rating)
 
-
+# curl -i -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/ratings -d '{"name": "New Rating"}'
 @app.route('/api/ratings', methods=['POST'])
 def add_rating():
     name = request.json['name']
@@ -320,7 +323,7 @@ def add_rating():
     db.session.commit()
     return rating_schema.dump(new_rating)
 
-
+# curl -i -H "Content-Type: application/json" -X PUT http://127.0.0.1:5000/api/ratings/<id> -d '{"name": "Updated Rating"}'
 @app.route('/api/ratings/<int:id>', methods=['PUT'])
 def update_rating(id):
     rating = Rating.query.get_or_404(id)
@@ -328,7 +331,7 @@ def update_rating(id):
     db.session.commit()
     return rating_schema.dump(rating)
 
-
+# curl -i -X DELETE http://127.0.0.1:5000/api/ratings/<id>
 @app.route('/api/ratings/<int:id>', methods=['DELETE'])
 def delete_rating(id):
     rating = Rating.query.get_or_404(id)
@@ -338,19 +341,20 @@ def delete_rating(id):
 
 
 # Netflix Content API Endpoints
+# curl -i http://127.0.0.1:5000/api/content
 @app.route('/api/content', methods=['GET'])
 def get_all_content():
     all_content = NetflixContent.query.all()
     result = contents_schema.dump(all_content)
     return jsonify(result)
 
-
+# curl -i http://127.0.0.1:5000/api/content/<show_id>
 @app.route('/api/content/<string:show_id>', methods=['GET'])
 def get_content(show_id):
     content = NetflixContent.query.get_or_404(show_id)
     return content_schema.dump(content)
 
-
+# curl -i -H "Content-Type: application/json" -X POST http://127.0.0.1:5000/api/content -d '{"show_id": "1", "title": "New Show", "type_id": 1, "director": "Director Name", "cast": "Cast Name", "country_id": 1, "date_added": "2023-01-01", "release_year": 2023, "rating_id": 1, "duration_minutes": 120, "duration_seasons": 3}'
 @app.route('/api/content', methods=['POST'])
 def add_content():
     data = request.json
@@ -371,7 +375,7 @@ def add_content():
     db.session.commit()
     return content_schema.dump(new_content)
 
-
+# curl -i -H "Content-Type: application/json" -X PUT http://127.0.0.1:5000/api/content/<show_id> -d '{"title": "Updated Show", "director": "New Director"}'
 @app.route('/api/content/<string:show_id>', methods=['PUT'])
 def update_content(show_id):
     content = NetflixContent.query.get_or_404(show_id)
@@ -391,7 +395,7 @@ def update_content(show_id):
     db.session.commit()
     return content_schema.dump(content)
 
-
+# curl -i -X DELETE http://127.0.0.1:5000/api/content/<show_id>
 @app.route('/api/content/<string:show_id>', methods=['DELETE'])
 def delete_content(show_id):
     content = NetflixContent.query.get_or_404(show_id)
@@ -401,9 +405,9 @@ def delete_content(show_id):
 
 
 # Aggregate API endpoints
+# curl -i http://127.0.0.1:5000/api/stats/content-by-country
 @app.route('/api/stats/content-by-country', methods=['GET'])
 def content_by_country():
-    """Get content count grouped by country"""
     stats = db.session.query(
         Country.name,
         func.count(NetflixContent.show_id).label('content_count')
@@ -418,9 +422,9 @@ def content_by_country():
     return jsonify([{'country': name, 'content_count': count} for name, count in stats])
 
 
+# curl -i http://127.0.0.1:5000/api/stats/min-max-avg-duration
 @app.route('/api/stats/min-max-avg-duration', methods=['GET'])
 def min_max_avg_duration():
-    """Get min, max and average duration of movies by release year"""
     stats = db.session.query(
         NetflixContent.release_year,
         func.min(NetflixContent.duration_minutes).label('min_duration'),
@@ -448,9 +452,9 @@ def min_max_avg_duration():
     } for year, min_dur, max_dur, avg_dur, count in stats])
 
 
+# curl -i http://127.0.0.1:5000/api/stats/content-by-type-and-rating
 @app.route('/api/stats/content-by-type-and-rating', methods=['GET'])
 def content_by_type_and_rating():
-    """Get content count grouped by type and rating"""
     stats = db.session.query(
         ContentType.name.label('type_name'),
         Rating.name.label('rating_name'),
@@ -472,3 +476,73 @@ def content_by_type_and_rating():
         'rating': rating_name,
         'content_count': count
     } for type_name, rating_name, count in stats])
+
+# Дополнительные запросы для агрегирования данных
+
+# curl -i http://127.0.0.1:5000/api/stats/avg-duration
+@app.route('/api/stats/avg-duration', methods=['GET'])
+def avg_duration():
+    avg_duration = db.session.query(
+        func.avg(NetflixContent.duration_minutes).label('avg_duration')
+    ).join(
+        ContentType, NetflixContent.type_id == ContentType.identifier
+    ).filter(
+        ContentType.name == 'Movie',
+        NetflixContent.duration_minutes.isnot(None)
+    ).scalar()
+
+    return jsonify({'avg_duration': avg_duration})
+
+# curl -i http://127.0.0.1:5000/api/stats/min-duration
+@app.route('/api/stats/min-duration', methods=['GET'])
+def min_duration():
+    min_duration = db.session.query(
+        func.min(NetflixContent.duration_minutes).label('min_duration')
+    ).join(
+        ContentType, NetflixContent.type_id == ContentType.identifier
+    ).filter(
+        ContentType.name == 'Movie',
+        NetflixContent.duration_minutes.isnot(None)
+    ).scalar()
+
+    return jsonify({'min_duration': min_duration})
+
+# curl -i http://127.0.0.1:5000/api/stats/max-duration
+@app.route('/api/stats/max-duration', methods=['GET'])
+def max_duration():
+    max_duration = db.session.query(
+        func.max(NetflixContent.duration_minutes).label('max_duration')
+    ).join(
+        ContentType, NetflixContent.type_id == ContentType.identifier
+    ).filter(
+        ContentType.name == 'Movie',
+        NetflixContent.duration_minutes.isnot(None)
+    ).scalar()
+
+    return jsonify({'max_duration': max_duration})
+
+# # curl -i http://127.0.0.1:5000/api/stats/content-by-type-and-rating
+# @app.route('/api/stats/content-by-type-and-rating', methods=['GET'])
+# def content_by_type_and_rating():
+#     """Get content count grouped by type and rating"""
+#     stats = db.session.query(
+#         ContentType.name.label('type_name'),
+#         Rating.name.label('rating_name'),
+#         func.count(NetflixContent.show_id).label('content_count')
+#     ).join(
+#         ContentType, NetflixContent.type_id == ContentType.identifier
+#     ).join(
+#         Rating, NetflixContent.rating_id == Rating.identifier
+#     ).group_by(
+#         ContentType.name,
+#         Rating.name
+#     ).order_by(
+#         ContentType.name,
+#         func.count(NetflixContent.show_id).desc()
+#     ).all()
+#
+#     return jsonify([{
+#         'type': type_name,
+#         'rating': rating_name,
+#         'content_count': count
+#     } for type_name, rating_name, count in stats])
