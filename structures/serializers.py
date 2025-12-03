@@ -55,7 +55,7 @@ class NetflixContentSchema(ma.SQLAlchemyAutoSchema):
 
     _links = ma.Hyperlinks(
         {
-            "self": ma.URLFor("get_content", values=dict(id="<show_id>")),
+            "self": ma.URLFor("get_content", values=dict(show_id="<show_id>")),
             "collection": ma.URLFor("get_all_content"),
         }
     )
