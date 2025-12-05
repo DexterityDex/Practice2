@@ -403,8 +403,6 @@ def delete_content(show_id):
     db.session.commit()
     return jsonify({'message': 'Content deleted'})
 
-
-# Aggregate API endpoints
 # curl -i http://127.0.0.1:5000/api/stats/content-by-country
 @app.route('/api/stats/content-by-country', methods=['GET'])
 def content_by_country():
@@ -520,6 +518,21 @@ def max_duration():
     ).scalar()
 
     return jsonify({'max_duration': max_duration})
+
+# Все виды контента
+# curl -i http://127.0.0.1:5000/api/content-types
+
+# Все страны
+# curl -i http://127.0.0.1:5000/api/countries
+
+# Все рейтинги
+# curl -i http://127.0.0.1:5000/api/ratings
+
+# Весь Netflix-контент
+# curl -i http://127.0.0.1:5000/api/content
+
+# Для каждого года выпуска: min, max и avg длительности фильмов (в минутах)
+# curl -i http://127.0.0.1:5000/api/stats/min-max-avg-duration
 
 # # curl -i http://127.0.0.1:5000/api/stats/content-by-type-and-rating
 # @app.route('/api/stats/content-by-type-and-rating', methods=['GET'])
